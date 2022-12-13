@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/football_db/src" modelPluginID="football_db" modelName="Premier_18_19"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="5.0" copyrightFields="false" operationReflection="true" importOrganizing="true">
+  <foreignModel>football_db.ecore</foreignModel>
+  <genPackages prefix="Football_db" disposableProviderFactory="true" ecorePackage="football_db.ecore#/">
+    <genClasses ecoreClass="football_db.ecore#//League">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//League/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference football_db.ecore#//League/Teams"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference football_db.ecore#//League/seasons"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//League/country"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//League/teams_number"/>
+    </genClasses>
+    <genClasses ecoreClass="football_db.ecore#//Season">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Season/start_year_season"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Season/end_year_season"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference football_db.ecore#//Season/league"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference football_db.ecore#//Season/game_weeks"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Season/weeks_number"/>
+    </genClasses>
+    <genClasses ecoreClass="football_db.ecore#//Team">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Team/name"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference football_db.ecore#//Team/League"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference football_db.ecore#//Team/Players"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference football_db.ecore#//Team/Matches"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Team/number_matches"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Team/wins"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Team/draws"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Team/losses"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Team/points"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Team/goals_scored"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Team/goals_conceded"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Team/clean_sheets"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Team/average_possesion"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Team/shots"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Team/shots_on_target"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Team/points_per_game"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Team/goals_difference"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Team/shoot_accuracy"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Team/shoots_per_game"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Team/shoots_on_target_per_game"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Team/scored_goals_per_game"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Team/conceded_goals_per_game"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Team/goals_per_shoots"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Team/goals_per_shoots_on_target"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Team/elo"/>
+    </genClasses>
+    <genClasses ecoreClass="football_db.ecore#//Player">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference football_db.ecore#//Player/Team"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Player/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Player/age"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Player/position"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Player/goals_scored"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Player/assists"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Player/minutes_played"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Player/matches_played"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Player/country"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Player/yellow_cards"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Player/red_cards"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Player/goals_per_match"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Player/assists_per_match"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Player/minutes_played_per_match"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Player/red_cards_per_match"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Player/yellow_cards_per_match"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Player/minutes_per_goal"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Player/minutes_per_assists"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Player/minutes_per_red_cards"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Player/minutes_per_yellow_cards"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Player/player_elo"/>
+    </genClasses>
+    <genClasses ecoreClass="football_db.ecore#//Match">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Match/match_number"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference football_db.ecore#//Match/home_team"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference football_db.ecore#//Match/away_team"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference football_db.ecore#//Match/game_week"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Match/goals_home_team"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Match/goals_away_team"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Match/home_possesion"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Match/away_possesion"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Match/home_corners"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Match/away_corners"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Match/home_shots"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Match/away_shots"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Match/home_shots_on_target"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Match/away_shots_on_target"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Match/home_faults"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Match/away_faults"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Match/home_yellow_cards"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Match/away_yellow_cards"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Match/home_red_cards"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Match/away_red_cards"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Match/winner"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Match/loser"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Match/win_home_team_probabilities"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Match/win_away_team_probabilities"/>
+    </genClasses>
+    <genClasses ecoreClass="football_db.ecore#//Game_Week">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Game_Week/number"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference football_db.ecore#//Game_Week/Matches"/>
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference football_db.ecore#//Game_Week/season"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute football_db.ecore#//Game_Week/matches_number"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

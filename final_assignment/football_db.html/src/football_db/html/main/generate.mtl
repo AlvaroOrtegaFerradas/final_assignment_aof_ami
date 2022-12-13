@@ -1,0 +1,353 @@
+[comment encoding = UTF-8 /]
+[module generate('http://www.example.org/football_db','http://www.eclipse.org/emf/2002/Ecore')]
+
+
+[template public generateElement(aLeague : League)]
+[comment @main/]
+[file (aLeague.name + '.html', false, 'UTF-8')]
+<!DOCTYPE html>
+<html>
+<head>
+  <title>[aLeague.name/]</title>
+</head>
+<body style="background-color: #00E5FF">
+	<h1 style="color: #3D195D; font-family: Calibri, sans-serif"><u><b>[aLeague.name/]</b></u><br>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<img src="Premier_League.png" alt="Logo" width="70" height=70"></h1>
+	<h1 style="color: #3D195D; font-family: Calibri, sans-serif">League Information:</h1>
+	<h2 style="color: #3D195D; font-family: Calibri, sans-serif">
+	<ul>
+		<li>Country: <i>[aLeague.country/]</i></li>
+		<li>Number of teams: <i>[aLeague.teams_number/]</i></li></h2><br>
+	</ul>
+
+
+	<div class="game_week_filter">
+		<h3 style="color: #3D195D; font-family: Calibri, sans-serif">SEASON SEARCHER</h3>
+		<select style="color: #3D195D; font-family: Calibri, sans-serif" name="Team" id ="Selection2">
+			[for (season: Season | aLeague.seasons)]
+				<option style="color: #3D195D; font-family: Calibri, sans-serif" value="[season.start_year_season/]-[season.end_year_season/]">[season.start_year_season/]-[season.end_year_season/]</option>
+			[/for]
+
+		</select>	
+		<button onclick = "filter()">Search</button>
+		<div class ="w2">
+			<p style="color: #3D195D; font-family: Calibri, sans-serif" id="season_id"></p>
+		</div>
+		<script>
+		function filter(){
+			let userInput = document.querySelector("#Selection2");
+			let counter = 0;
+			let a = "";
+	
+			[for (season:Season | aLeague.seasons)]
+			if ("[season.start_year_season/]-[season.end_year_season/]" == userInput.value){
+				a += "Season: " + "[season.start_year_season/]-[season.end_year_season/]" + "<br>" +
+					"Number of weeks: " + "[season.weeks_number/]";
+				counter +=1;
+				console.log(counter);
+			}
+			[/for]
+			document.getElementById("season_id").innerHTML = a;
+			}
+			</script>
+	</div>
+
+
+
+	<div class="matches_filter">
+	<h3 style="color: #3D195D; font-family: Calibri, sans-serif">MATCHES STATISTICS SEARCHER</h3>
+		<select style="color: #3D195D; font-family: Calibri, sans-serif" name="Matches" id ="Selection4">
+			[for (match: Match | aLeague.seasons.game_weeks.Matches)]
+				<option style="color: #3D195D; font-family: Calibri, sans-serif" value="[match.home_team.name/] - [match.away_team.name/]">[match.home_team.name/] - [match.away_team.name/]</option>;
+			[/for]
+		</select>
+		<button onclick = "filter_match()">Search</button>
+		<div class ="w">
+			<p style="color: #3D195D; font-family: Calibri, sans-serif" id="match_id"></p>
+		</div>
+		<script>
+		function filter_match(){
+			let userInput2 = document.querySelector("#Selection4");
+			let counter2 = 0;
+			let a2 = "";
+
+			[for (match: Match | aLeague.seasons.game_weeks.Matches)]
+			if ("[match.home_team.name/] - [match.away_team.name/]" == userInput2.value){
+				a2 += "Game week: " + "[match.game_week.number/]" + "<br>" +
+				"Goals: " + "[match.goals_home_team/]" +"-"+"[match.goals_away_team/]"+ "<br>" +
+				"Possesion: " + "[match.home_possesion/]" +"-"+"[match.away_possesion/]"+ "<br>" +
+				"Corners: " + "[match.home_corners/]" +"-"+"[match.away_corners/]"+ "<br>" +
+				"Shots: " + "[match.home_shots/]" +"-"+"[match.away_shots/]"+ "<br>" +
+				"Shots on target: " + "[match.home_shots_on_target/]" +"-"+"[match.away_shots_on_target/]"+ "<br>" +
+				"Faults: " + "[match.home_faults/]" +"-"+"[match.away_faults/]"+ "<br>" +
+				"Yellow cards: " + "[match.home_yellow_cards/]" +"-"+"[match.away_yellow_cards/]"+ "<br>" +
+				"Red cards: " + "[match.home_red_cards/]" +"-"+"[match.away_red_cards/]"+
+				"<br>"+"<br>"+"<br>"+"<br>"+
+				"Winner:" + "[match.winner/]"+"<br>"+
+				"Loser:" + "[match.loser/]"+"<br>"+
+				"<br>"+"<br>"+
+				"Expectations: "+
+				"<br>"+"<br>"+
+				"[match.home_team.name/]" + " win probabilites: " +"[match.win_home_team_probabilities/]" +"%"+"<br>"+
+				"[match.away_team.name/]" + " win probabilites: " +"[match.win_away_team_probabilities/]"+"%";
+				
+				counter2 +=1;
+				console.log(counter2);
+				}
+			[/for]
+			document.getElementById("match_id").innerHTML = a2;
+		}
+		</script>
+	
+	</div>
+
+
+
+
+	<div class="teams_filter">
+		<h3 style="color: #3D195D; font-family: Calibri, sans-serif">TEAMS STATISTICS SEARCHER</h3>
+		<select style="color: #3D195D; font-family: Calibri, sans-serif" name="Team" id ="Selection">
+			[for (team: Team | aLeague.Teams)]
+				<option style="color: #3D195D; font-family: Calibri, sans-serif" value="[team.name/]">[team.name/]</option>
+			[/for]
+		</select>	
+		<button onclick = "filter_team()">Search</button>
+		<div class ="w">
+			<p style="color: #3D195D; font-family: Calibri, sans-serif" id="team_id"></p>
+		</div>
+		<script>
+			function filter_team(){
+				var userInput = document.querySelector("#Selection");
+				let counter = 0;
+				let a = "";
+		
+				[for (team:Team | aLeague.Teams)]
+				if ("[team.name/]" == userInput.value){
+					a += "Matches played: " + "[team.number_matches/]" + "<br>" +
+					"Wins: " + "[team.wins/]" + "<br>" +
+					"Draws: " + "[team.draws/]" + "<br>" +
+					"Losses: " + "[team.losses/]" + "<br>" +
+					"Points: " + "[team.points/]" + "<br>" +
+					"Scored Goals: " + "[team.goals_scored/]"+ "<br>" +
+					"Conceded Goals: " + "[team.goals_conceded/]"+ "<br>" +
+					"Clean sheets: " + "[team.clean_sheets/]"+ "<br>" +
+					"Average Possesion: " + "[team.average_possesion/]"+ "<br>" +
+					"Shots: "+ "[team.shots/]" + "<br>" +
+					"Shots on target: " + "[team.shots_on_target/]"+ "<br>" +
+					"Points per game: "+ "[team.points_per_game/]" + "<br>" +
+					"Goal difference: " + "[team.goals_difference/]"+ "<br>" +
+					"Shot accuracy: " + "[team.shoot_accuracy/]"+ "<br>" +
+					"Shots per game: " + "[team.shoots_per_game/]"+ "<br>" +
+					"Shots on target per game: " + "[team.shoots_on_target_per_game/]"+ "<br>" +
+					"Scored goals per game: " + "[team.scored_goals_per_game/]"+ "<br>" +
+					"Conceded goals per game: " + "[team.conceded_goals_per_game/]"+ "<br>" +
+					"Goals per shots: " + "[team.goals_per_shoots/]"+ "<br>" +
+					"Goals per shots on target: " + "[team.goals_per_shoots_on_target/]" + "<br>" +
+					"ELO: "+ "[team.elo/]";
+	
+					counter +=1;
+					console.log(counter);
+				}
+				[/for]
+				document.getElementById("team_id").innerHTML = a;
+				}
+			</script>
+	</div>
+	<div class="player_filter">
+		<h3 style="color: #3D195D; font-family: Calibri, sans-serif">PLAYER STATISTICS SEARCHER</h3>
+		<select style="color: #3D195D; font-family: Calibri, sans-serif" name="Team" id ="Selection3">
+			[for (team: Team | aLeague.Teams)]
+				[for (player: Player | team.Players)]
+					<option style="color: #3D195D; font-family: Calibri, sans-serif" value="[player.name/]">[player.name/]</option>
+				[/for]
+			[/for]
+
+		</select>	
+		<button onclick = "filter_player()">Search</button>
+		<div class ="w3">
+			<p style="color: #3D195D; font-family: Calibri, sans-serif" id="player_id"></p>
+		</div>
+		<script>
+		function filter_player(){
+			let userInput = document.querySelector("#Selection3");
+			let counter = 0;
+			let a = "";
+			[for (team: Team | aLeague.Teams)]
+				[for (player: Player | team.Players)]
+					if ("[player.name/]" == userInput.value){
+				a += "Name: " + "[player.name/]" + "<br>" +
+					"Team: " + "[player.Team.name/]" + "<br>" +
+					"Age: " + "[player.age/]" + "<br>" +	
+					"Position: " + "[player.name/]" + "<br>" +
+					"Goals: " + "[player.goals_scored/]" + "<br>" +
+					"Assists: " + "[player.assists/]" + "<br>" +
+					"Minutes played: " + "[player.minutes_played/]" + "<br>" +
+					"Matches played: " + "[player.matches_played/]" + "<br>" +
+					"Country: " + "[player.country/]" + "<br>" +
+					"Yellow cards: " + "[player.yellow_cards/]" + "<br>" +
+					"Red cards: " + "[player.red_cards/]" + "<br>" +
+					"Goals per match: " + "[player.goals_per_match/]" + "<br>" +
+					"Assists per match: " + "[player.assists_per_match/]" + "<br>" +
+					"Minutes played per match: " + "[player.minutes_played_per_match/]" + "<br>" +
+					"Red cards per match: " + "[player.red_cards_per_match/]" + "<br>" +
+					"Yellow cards per match: " + "[player.yellow_cards_per_match/]" + "<br>" +
+					"Minutes per goal: " + "[player.minutes_per_goal/]" + "<br>" +
+					"Minutes per assists: " + "[player.minutes_per_assists/]" + "<br>" +
+					"Minutes per red cards: " + "[player.minutes_per_red_cards/]" + "<br>" +
+					"Minutes per yellow cards: " + "[player.minutes_per_yellow_cards/]" + "<br>" +
+					"Player ELO: " + "[player.player_elo/]";
+				counter +=1;
+				console.log(counter);
+			}
+				[/for]
+			[/for]
+			document.getElementById("player_id").innerHTML = a;
+			}
+			</script>
+	</div>
+
+
+
+	</body>
+</html>
+[/file]
+[/template]
+
+
+
+[template public generate(season: Season)]
+<div class="season">
+<h3 style="color: #3D195D; font-family: Calibri, sans-serif">Season: [season.start_year_season/]-[season.end_year_season/]</h3>
+<h4 style="color: #3D195D; font-family: Calibri, sans-serif">Number of weeks: [season.weeks_number/]</h4>
+</div>
+[/template]
+
+[template public generate(team: Team)]
+<div class="team">
+<h5 style="color: #3D195D; font-family: Calibri, sans-serif"><b><u>[team.name/]</u></b></h5>
+<h6 style="color: #3D195D; font-family: Calibri, sans-serif">Team Statistics:</h6>
+<h7 style="color: #3D195D; font-family: Calibri, sans-serif"><ul>
+	<li>Matches played: [team.number_matches/]</li>
+	<li>Wins: [team.wins/]</li>
+	<li>Draws: [team.draws/]</li>
+	<li>Loses: [team.losses/]</li>
+	<li>Points: [team.points/]</li>
+	<li>Goals scored: [team.goals_scored/]
+	<li>Goals Conceded: [team.goals_conceded/]</li>
+	<li>Clean sheets: [team.clean_sheets/]</li>
+	<li>Average possesion: [team.average_possesion/]</li>
+	<li>Shots: [team.shots/]</li>
+	<li>Shots on target: [team.shots_on_target/]</li>
+	<li>Points per game: [team.points_per_game/]</li>
+	<li>Goals difference: [team.goals_difference/]</li>
+	<li>Shoot accuracy: [team.shoot_accuracy/]</li>
+	<li>Shots per game: [team.shoots_per_game/]</li>
+	<li>Shots on target per game: [team.shoots_on_target_per_game/]</li>
+	<li>Scored goals per game: [team.scored_goals_per_game/]</li>
+	<li>Conceded goals per game: [team.conceded_goals_per_game/]</li>
+	<li>Goals per shots: [team.goals_per_shoots/]</li>
+	<li>Goals per shots on target: [team.goals_per_shoots_on_target/]</li>
+	<li>ELO: [team.elo/]</li> </ul></h7>
+</div>
+[/template]
+
+[template public generate(player: Player)]
+<div class="player">
+<h5 style="color: #3D195D; font-family: Calibri, sans-serif"><b><u>[player.name/]</u></b></h5>
+<h6 style="color: #3D195D; font-family: Calibri, sans-serif">Player Statistics:</h6>
+<h7 style="color: #3D195D; font-family: Calibri, sans-serif"><ul>
+	<li>Team: [player.Team/]</li>
+	<li>Age: [player.age/]</li>
+	<li>Position: [player.position/]</li>
+	<li>Goals: [player.goals_scored/]</li>
+	<li>Assists: [player.assists/]</li>
+	<li>Minutes played: [player.minutes_played/]</li>
+	<li>Matches played: [player.matches_played/]</li>
+	<li>Country: [player.country/]</li>
+	<li>Yellow cards: [player.yellow_cards/]</li>
+	<li>Red cards: [player.red_cards/]</li>
+	<li>Goals per match: [player.goals_per_match/]</li>
+	<li>Assists per match: [player.assists_per_match/]</li>
+	<li>Minutes played per match: [player.minutes_played_per_match/]</li>
+	<li>Red cards per match: [player.red_cards_per_match/]</li>
+	<li>Yellow cards per match: [player.yellow_cards_per_match/]</li>
+	<li>Minutes per goal: [player.minutes_per_goal/]</li>
+	<li>Minutes per assists: [player.minutes_per_assists/]</li>
+	<li>Minutes per red cards: [player.minutes_per_red_cards/]</li>
+	<li>Minutes per yellow cards: [player.minutes_per_yellow_cards/]</li>
+	<li>Player ELO: [player.player_elo/]</li></ul></h7>
+</div>
+[/template]
+
+[template public generate(match: Match)]
+<div class="match">
+<h5 style="color: #3D195D; font-family: Calibri, sans-serif"><b><u> MATCH [match.match_number/]:<br>[match.home_team/]([match.goals_home_team/])-([match.goals_away_team/])[match.away_team/]</u></b></h5>
+<h6 style="color: #3D195D; font-family: Calibri, sans-serif">Match Statistics:</h6>
+<h7 style="color: #3D195D; font-family: Calibri, sans-serif">Game week: [match.game_week/]<br>
+<table>
+	<tr>
+		<th>[match.home_team/]</th>
+		<th>[match.away_team/]</th>
+		<th></th>
+	</tr>
+	<tr>
+		<td>[match.goals_home_team/]</td>
+		<td>[match.goals_away_team/]</td>
+		<td>GOALS</td>
+	</tr>
+	<tr>
+		<td>[match.home_possesion/]</td>
+		<td>[match.away_possesion/]</td>
+		<td>POSSESION</td>
+	</tr>
+	<tr>
+		<td>[match.home_corners/]</td>
+		<td>[match.away_corners/]</td>
+		<td>CORNERS</td>
+	</tr>
+	<tr>
+		<td>[match.home_shots/]</td>
+		<td>[match.away_shots/]</td>
+		<td>SHOTS</td>
+	</tr>
+	<tr>
+		<td>[match.home_shots_on_target/]</td>
+		<td>[match.away_shots_on_target/]</td>
+		<td>SHOTS ON TARGET</td>
+	</tr>
+	<tr>
+		<td>[match.home_faults/]</td>
+		<td>[match.away_faults/]</td>
+		<td>FAULTS</td>
+	</tr>
+	<tr>
+		<td>[match.home_yellow_cards/]</td>
+		<td>[match.away_yellow_cards/]</td>
+		<td>YELLOW CARDS</td>
+	</tr>
+	<tr>
+		<td>[match.home_red_cards/]</td>
+		<td>[match.away_red_cards/]</td>
+		<td>RED CARDS</td>
+	</tr>
+</table></h7>
+<h6 style="color: #3D195D; font-family: Calibri, sans-serif">Results:</h6>
+<h7 style="color: #3D195D; font-family: Calibri, sans-serif">WINNER: [match.winner/]<br>LOSER: [match.loser/]<br>
+<table>
+	<tr>
+		<th>[match.home_team/]</th>
+		<th>[match.away_team/]</th>
+		<th>EXPECTATIONS</th>
+	</tr>
+	<tr>
+		<td>[match.win_home_team_probabilities/]</td>
+		<td>[match.win_away_team_probabilities/]</td>
+		<td>PROBABILITIES</td>
+	</tr>
+</table></h7>
+</div>
+[/template]
+
+[template public generate(game_week: Game_Week)]
+<div class="game_week">
+</div>
+[/template]
